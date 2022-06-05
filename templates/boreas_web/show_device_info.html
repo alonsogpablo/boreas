@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+{% load querystring from django_tables2 %}
+{% block container %}
+{% load render_table from django_tables2 %}
+{% load i18n %}
+
+{#<!doctype html>#}
+<html>
+    <head>
+        <title>Last Measure</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    </head>
+    <body>
+        {% render_table table %}
+    </body>
+</html>
+
+<a href = "{% querystring '_export'='csv'  %}"> {%  trans 'Download CSV'  %}</a>
+
+{% endblock %}

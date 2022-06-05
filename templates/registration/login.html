@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+
+{% block container %}
+
+{% if form.errors %}
+<p>{%  trans 'Your username and password did not match. Please try again.'  %}</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>{%  trans 'Your account does not have access to this page. To proceed, please login with an account that has access.'  %}</p>
+    {% else %}
+    <p>{%  trans 'Please login to see this page.'  %}</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div>
+  <td>{{ form.username |as_crispy_field }}</td>
+</div>
+<div>
+  <td>{{ form.password|as_crispy_field  }}</td>
+</div>
+
+<div>
+  <input class="btn btn-primary"  type="submit" value="login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">{%  trans 'Lost password?'  %}</a></p>
+
+{% endblock %}

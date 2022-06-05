@@ -1,0 +1,9 @@
+Para crear un nuevo idioma:
+
+django-admin makemessages -l de,
+crea locale/de/LC_MESSAGES/django.po
+
+Añadimos las traducciones a django.po
+Para compilar un nuevo fichero django.po
+
+django-admin compilemessages -l es

@@ -1,0 +1,59 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+{% block container %}
+  <h2>{%  trans 'Sign up'  %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+     <div class="form-group col-md-6 mb-0">
+      {{ user_form.username|as_crispy_field  }}
+     </div>
+     <div class="form-group col-md-6 mb-0">
+      {{ user_form.email|as_crispy_field  }}
+     </div>
+     </div>
+
+     <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+      {{ user_form.first_name|as_crispy_field  }}
+     </div>
+     <div class="form-group col-md-6 mb-0">
+      {{ user_form.last_name|as_crispy_field  }}
+     </div>
+     </div>
+     <div class="form-row">
+      <div class="form-group col-md-12 mb-0">
+      {{ client_form.address |as_crispy_field }}
+     </div>
+     </div>
+     <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+      {{ client_form.country |as_crispy_field }}
+     </div>
+     <div class="form-group col-md-4 mb-0">
+      {{ client_form.city |as_crispy_field }}
+     </div>
+      <div class="form-group col-md-4 mb-0">
+     {{ client_form.zipcode |as_crispy_field }}
+     </div>
+     </div>
+     <div class="form-row">
+     <div class="form-group col-md-4 mb-0">
+      {{ client_form.phone |as_crispy_field }}
+     </div>
+      <div class="form-group col-md-4 mb-0">
+      {{ client_form.password1 |as_crispy_field }}
+     </div>
+      <div class="form-group col-md-4 mb-0">
+      {{ client_form.password2 |as_crispy_field }}
+     </div>
+     </div>
+     <button type="submit" class="btn btn-primary">{%  trans 'Create'  %}</button>
+  </form>
+
+
+{% endblock %}
+

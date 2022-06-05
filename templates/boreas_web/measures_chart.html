@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+<!-- Add additional CSS in static file -->
+{% load static %}
+
+{% block container %}
+<head>
+    <meta charset="UTF-8">
+    <title>Measures</title>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="measures_chart"><</div>
+
+<script>
+
+    new Highcharts.chart({{chart|safe}});
+</script>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load i18n %}
+
+<head>
+{% block title %}<title>boreas</title>{% endblock %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+<a class="navbar-brand" href="#">
+<img src="{%  static 'img/boreas.png'%}" height="30" alt="mdb logo">
+</a>
+
+<a class="navbar-brand" href="{% url 'index' %}">boreas</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav mr-auto">
+
+{#EL FILTRO SAFE SIRVE PARA EVITAR EL AUTO ESCAPE Y QUE FUNCIONE LA COMPARACION#}
+
+{#        {% if 'team_vf' in user.groups.all|safe %}#}
+{#            <li class="nav-item active">#}
+{#            <a class="nav-link" href={% url 'measures_chart' %}>Gráficas</a>#}
+{#            </li>#}
+{##}
+{#            </li>#}
+
+{% if user.is_staff  %}
+<li><a class="nav-link" href="{% url 'all_devices_table' %}">{%  trans 'All devices'  %}</a></li>
+{% endif %}
+
+{% if user.is_authenticated %}
+
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Admin</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+<a class="dropdown-item" href={% url 'change_password' %}>{%  trans 'Password change'  %}</a>
+<a class="dropdown-item"  href={% url 'password_reset' %}>{%  trans 'Password reset'  %}</a>
+<a class="dropdown-item"  href={% url 'signup' %}>{%  trans 'Signup'  %}</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">{%  trans 'Manage Devices'  %}</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+<a class="dropdown-item" href={% url 'create_device' %}>{%  trans 'Create device'  %}</a>
+<a class="dropdown-item"  href={% url 'devices_table' %}>{%  trans 'Devices table'  %}</a>
+</div>
+</li>
+
+<li><a class="nav-link" >{{ user.get_username }}</a></li>
+<li><a class="nav-link" href="{% url 'logout'%}">logout</a>
+
+{% else %}
+<li><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">login</a></li>
+{% endif %}
+</ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
+
+<div class="container-fluid">
+{% block container %}
+{% endblock %}
+</div>
+
+
+{% block js %}
+<script src="{% static '/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static '/js/popper.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/js/bootstrap-dropdown.js' %}"></script>
+<script src="{% static '/js/highcharts.src.js' %}"></script>
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
